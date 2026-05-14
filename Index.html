@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Propuesta de Mejora Institucional en el marco de Escuelas Precursoras. Instituto Leibnitz, Villa María." />
+  <title>Instituto Leibnitz · Escuelas Precursoras 2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --brand-blue: #2D3C6E;
+      --brand-orange: #F07200;
+      --brand-orange-soft: rgba(240, 114, 0, 0.1);
+      --bg: #FAFBFE;
+      --text-main: #1A1F2B;
+      --text-muted: #5E677E;
+      --border: rgba(45, 60, 110, 0.12);
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -1;
+      pointer-events: none;
+      mask-image: radial-gradient(circle at 50% 50%, black, transparent 90%);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 251, 254, 0.8);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--brand-blue);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero {
+      padding: 6rem 0 4rem;
+      text-align: left;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      background: var(--brand-blue);
+      color: white;
+      padding: 4px 12px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--brand-orange); 
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      max-width: 650px;
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--brand-orange);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .section-title::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: var(--border);
+    }
+
+    .section-intro {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin-bottom: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .grid-jornadas {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .jornada-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 2rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .jornada-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 4px; height: 0;
+      background: var(--brand-orange);
+      transition: height 0.3s;
+    }
+
+    .jornada-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(45, 60, 110, 0.08);
+      border-color: var(--brand-blue);
+    }
+
+    .jornada-card:hover::before { height: 100%; }
+
+    .card-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-date {
+      background: var(--brand-blue);
+      color: white;
+      padding: 2px 8px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--brand-blue);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .card-action {
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--brand-blue);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 5rem;
+    }
+
+    .about-item {
+      background: white;
+      padding: 2.5rem;
+    }
+
+    .about-item h3 {
+      color: var(--brand-blue);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    footer {
+      background: var(--brand-blue);
+      color: white;
+      padding: 4rem 0 3rem;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .contact-info a {
+      color: white;
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .contact-info a:hover { opacity: 1; color: var(--brand-orange); }
+
+    .legal {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-info { flex-direction: column; align-items: center; text-align: center; gap: 1rem; }
+      .legal { flex-direction: column; align-items: center; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="brand">INSTITUTO LEIBNITZ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <section class="hero">
+      <div class="tag">Agendas de trabajo</div>
+      <h1>Jornadas de Formación Situada 2026</h1>
+      <p>Un itinerario de formación situada diseñado para potenciar la enseñanza, fortalecer el liderazgo pedagógico y consolidar comunidades de aprendizaje profesional.</p>
+    </section>
+
+    <section id="jornadas">
+      <h2 class="section-title">PLANIFICACIÓN / AGENDAS DE TRABAJO</h2>
+      <div class="grid-jornadas">
+        
+        <a href="https://spectacular-jelly-fbeaaa.netlify.app/" target="_blank" class="jornada-card">
+          <div class="card-meta">
+            <span>[ JORNADA 2 ]</span>
+            <span class="card-date">FEBRERO 2026</span>
+          </div>
+          <h3 class="card-title">Encuentro de Diagnóstico y Priorización</h3>
+          <p class="card-desc">Materiales para la identificación de problemas de enseñanza y definición de metas institucionales.</p>
+          <div class="card-action">ACCEDER A LA AGENDA <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </a>
+
+        <a href="https://bespoke-pavlova-ba6bfb.netlify.app/#" target="_blank" class="jornada-card">
+          <div class="card-meta">
+            <span>[ JORNADA 3 ]</span>
+            <span class="card-date">FEBRERO 2026</span>
+          </div>
+          <h3 class="card-title">Diseño de Intervenciones Pedagógicas</h3>
+          <p class="card-desc">Planificación colegiada de secuencias didácticas orientadas a la innovación técnica.</p>
+          <div class="card-action">ACCEDER A LA AGENDA <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </a>
+
+        <a href="https://jfs-mayo-leibnitz.netlify.app/" target="_blank" class="jornada-card">
+          <div class="card-meta">
+            <span>[ JORNADA 4 ]</span>
+            <span class="card-date">MAYO 2026</span>
+          </div>
+          <h3 class="card-title">Seguimiento y Validación de Prácticas</h3>
+          <p class="card-desc">Instancia de monitoreo evolutivo para ajustar las estrategias de enseñanza según resultados observados.</p>
+          <div class="card-action">ACCEDER A LA AGENDA <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </a>
+
+      </div>
+    </section>
+
+    <section id="sobre">
+      <h2 class="section-title">PILARES / MODELO DE TRANSFORMACIÓN</h2>
+      <p class="section-intro">Ejes de intervención pedagógica alineados con los objetivos estratégicos de la Red de Escuelas Precursoras.</p>
+      <div class="about-grid">
+        <div class="about-item">
+          <h3>Liderazgo y Co-creación</h3>
+          <p>Transformamos el conocimiento individual en una construcción pedagógica colectiva, superando modelos de aprendizaje pasivo.</p>
+        </div>
+        <div class="about-item">
+          <h3>Sentido Situado</h3>
+          <p>Desarrollamos proyectos validados en la realidad técnica de nuestras aulas, garantizando respuestas pertinentes al contexto de Villa María.</p>
+        </div>
+        <div class="about-item">
+          <h3>Cultura de la Experimentación</h3>
+          <p>Fomentamos el uso de recursos abiertos y bibliotecas colaborativas para ensayar y escalar nuevas prácticas docentes.</p>
+        </div>
+        <div class="about-item">
+          <h3>Evaluación para la Mejora</h3>
+          <p>Implementamos registros y seguimientos del recorrido institucional para medir el impacto y tomar decisiones basadas en evidencia.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="contact-info">
+          <a href="mailto:secretaria@leibnitz.edu.ar">secretaria@leibnitz.edu.ar</a>
+          <a href="tel:+5493534069816">+54 9 3534 06-9816</a>
+          <a href="#">Rawson 1899 · Villa María · Córdoba</a>
+        </div>
+        <div class="legal">
+          <span>© 2026 INSTITUTO LEIBNITZ</span>
+          <span>COMPROMISO DE MEJORA INSTITUCIONAL // V_2.0</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
