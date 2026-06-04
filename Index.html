@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,25 +6,59 @@
   <meta name="description" content="Propuesta de Mejora Institucional en el marco de Escuelas Precursoras. Instituto Leibnitz, Villa María, 2026." />
   <title>Instituto Leibnitz · Escuelas Precursoras 2026</title>
 
+  <!-- Google Fonts: Outfit (Títulos), Inter (Cuerpo), JetBrains Mono (Métricas y Tags) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     :root {
+      /* Paleta Institucional Leibnitz */
       --brand-blue: #2D3C6E;
+      --brand-blue-rgb: 45, 60, 110;
       --brand-orange: #F07200;
-      --brand-orange-soft: rgba(240, 114, 0, 0.1);
-      --bg: #FAFBFE;
-      --text-main: #1A1F2B;
-      --text-muted: #5E677E;
-      --border: rgba(45, 60, 110, 0.12);
+      --brand-orange-rgb: 240, 114, 0;
+      --brand-orange-hover: #d56500;
+      --brand-orange-soft: rgba(240, 114, 0, 0.08);
+      
+      /* Colores de Fondo y Texto */
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: rgba(45, 60, 110, 0.08);
+      --border-focus: rgba(240, 114, 0, 0.3);
+      
+      /* Tipografía */
       --font-sans: 'Inter', system-ui, sans-serif;
+      --font-display: 'Outfit', system-ui, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+
+      /* Sombras y Efectos */
+      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 4px 6px -1px rgba(45, 60, 110, 0.05), 0 2px 4px -2px rgba(45, 60, 110, 0.03);
+      --shadow-lg: 0 20px 25px -5px rgba(45, 60, 110, 0.08), 0 10px 10px -5px rgba(45, 60, 110, 0.03);
+      --shadow-premium: 0 25px 50px -12px rgba(45, 60, 110, 0.15);
+      
+      /* Bordes y Transiciones */
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --radius-full: 9999px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+    
+    html { 
+      scroll-behavior: smooth; 
+      scroll-padding-top: 100px;
+    }
 
     body {
       background-color: var(--bg);
@@ -33,8 +66,10 @@
       font-family: var(--font-sans);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
+    /* Fondo de Rejilla de Ingeniería / Educativo Premium */
     body::before {
       content: "";
       position: fixed;
@@ -43,345 +78,1051 @@
       background-image: 
         linear-gradient(var(--border) 1px, transparent 1px),
         linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background-size: 50px 50px;
       z-index: -1;
       pointer-events: none;
-      mask-image: radial-gradient(circle at 50% 50%, black, transparent 90%);
+      mask-image: radial-gradient(circle at 50% 30%, black 20%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at 50% 30%, black 20%, transparent 80%);
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 2rem;
     }
 
+    /* HEADER */
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(250, 251, 254, 0.8);
-      backdrop-filter: blur(8px);
+      background: rgba(248, 250, 252, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    
+    header.scroll {
+      box-shadow: var(--shadow-md);
+      background: rgba(255, 255, 255, 0.9);
     }
 
     nav {
-      height: 70px;
+      height: 80px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       text-decoration: none;
       color: var(--brand-blue);
+      font-family: var(--font-display);
       font-weight: 800;
-      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    
+    .brand img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
       letter-spacing: -0.02em;
     }
 
+    .brand-subtitle {
+      font-size: 0.65rem;
+      font-family: var(--font-mono);
+      color: var(--brand-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      padding: 8px 0;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--brand-orange);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--brand-blue);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* HERO SECTION */
     .hero {
-      padding: 6rem 0 4rem;
-      text-align: left;
+      padding: 7rem 0 5rem;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .tag {
       display: inline-flex;
       align-items: center;
+      gap: 8px;
       background: var(--brand-blue);
       color: white;
-      padding: 4px 12px;
+      padding: 6px 14px;
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: 0.72rem;
+      font-weight: 600;
       text-transform: uppercase;
+      margin-bottom: 1.75rem;
+      letter-spacing: 0.05em;
+      clip-path: polygon(0% 0%, 100% 0%, 93% 100%, 0% 100%);
+    }
+
+    .hero-title-wrap {
       margin-bottom: 1.5rem;
-      clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 0% 100%);
     }
 
     .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 800;
-      line-height: 1.1;
-      color: var(--brand-orange); 
-      margin-bottom: 1.5rem;
+      font-family: var(--font-display);
+      font-size: clamp(2.75rem, 5.5vw, 4.25rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--brand-blue);
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--brand-orange) 0%, #db5100 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
     }
 
     .hero p {
-      max-width: 650px;
       font-size: 1.15rem;
       color: var(--text-muted);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      max-width: 620px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--brand-orange);
+      color: white;
+      box-shadow: 0 4px 14px rgba(240, 114, 0, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--brand-orange-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(240, 114, 0, 0.4);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--brand-blue);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #f1f5f9;
+      border-color: var(--brand-blue);
+      transform: translateY(-2px);
+    }
+
+    /* Tarjeta Estadística Flotante (Hero Derecha) */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .stats-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      z-index: 2;
+    }
+
+    .stats-panel::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(45, 60, 110, 0.15);
+      border-radius: var(--radius-lg);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .panel-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .panel-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: var(--brand-blue);
+      font-size: 1.1rem;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--brand-orange);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(240, 114, 0, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(240, 114, 0, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(240, 114, 0, 0); }
+    }
+
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-number {
+      font-family: var(--font-mono);
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--brand-blue);
+      line-height: 1;
+      min-width: 60px;
+    }
+
+    .stat-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .stat-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* SECCIONES COMUNES */
+    section {
+      padding: 5rem 0;
     }
 
     .section-title {
-      font-family: var(--font-mono);
+      font-family: var(--font-display);
       font-size: 0.85rem;
+      font-weight: 800;
       color: var(--brand-orange);
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .section-title::after {
       content: "";
       height: 1px;
       flex: 1;
-      background: var(--border);
+      background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
     }
 
     .section-intro {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      max-width: 700px;
-      margin-bottom: 2.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
+      font-size: 1.25rem;
+      color: var(--brand-blue);
+      font-family: var(--font-display);
+      font-weight: 700;
+      max-width: 800px;
+      margin-bottom: 3rem;
+      line-height: 1.5;
     }
 
+    /* JORNADAS SECTION */
     .grid-jornadas {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 5rem;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
 
     .jornada-card {
-      background: white;
+      background: var(--card-bg);
       border: 1px solid var(--border);
-      padding: 2rem;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
       text-decoration: none;
       color: inherit;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    .jornada-card::before {
+    .jornada-card::after {
       content: "";
       position: absolute;
-      top: 0; left: 0; width: 4px; height: 0;
-      background: var(--brand-orange);
-      transition: height 0.3s;
+      top: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(90deg, var(--brand-orange) 0%, var(--brand-blue) 100%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
     }
 
     .jornada-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(45, 60, 110, 0.08);
-      border-color: var(--brand-blue);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-premium);
+      border-color: rgba(45, 60, 110, 0.15);
     }
 
-    .jornada-card:hover::before { height: 100%; }
+    .jornada-card:hover::after {
+      transform: scaleX(1);
+    }
 
     .card-meta {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 1.5rem;
     }
 
-    .card-date {
-      background: var(--brand-blue);
-      color: white;
-      padding: 2px 8px;
-      font-weight: 500;
+    .card-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--brand-blue);
+      opacity: 0.8;
       letter-spacing: 0.05em;
     }
 
-    .card-title {
-      font-size: 1.3rem;
+    .card-date {
+      background: var(--brand-orange-soft);
+      color: var(--brand-orange);
+      padding: 4px 12px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
       font-weight: 700;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(240, 114, 0, 0.15);
+      letter-spacing: 0.05em;
+    }
+
+    .card-icon-wrap {
+      width: 48px;
+      height: 48px;
+      background: #f1f5f9;
       color: var(--brand-blue);
-      margin-bottom: 0.75rem;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .jornada-card:hover .card-icon-wrap {
+      background: var(--brand-orange-soft);
+      color: var(--brand-orange);
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--brand-blue);
+      margin-bottom: 1rem;
       line-height: 1.3;
     }
 
     .card-desc {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
+      margin-bottom: 2rem;
+      flex-grow: 1;
     }
 
     .card-action {
-      margin-top: 1.5rem;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
       font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-size: 0.72rem;
+      font-weight: 700;
       color: var(--brand-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: var(--transition);
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      margin-top: auto;
+      width: 100%;
     }
 
+    .card-action svg {
+      transition: transform 0.3s;
+    }
+
+    .jornada-card:hover .card-action {
+      color: var(--brand-orange);
+    }
+
+    .jornada-card:hover .card-action svg {
+      transform: translateX(6px);
+    }
+
+    /* PILARES SECTION */
     .about-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-bottom: 5rem;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     .about-item {
-      background: white;
-      padding: 2.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      gap: 20px;
+    }
+
+    .about-item:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(45, 60, 110, 0.15);
+    }
+
+    .about-item-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(45, 60, 110, 0.05);
+      color: var(--brand-blue);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .about-item:hover .about-item-icon {
+      background: var(--brand-orange-soft);
+      color: var(--brand-orange);
+    }
+
+    .about-item-content {
+      display: flex;
+      flex-direction: column;
     }
 
     .about-item h3 {
+      font-family: var(--font-display);
       color: var(--brand-blue);
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-      font-weight: 700;
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+      font-weight: 800;
     }
 
+    .about-item p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
     footer {
       background: var(--brand-blue);
       color: white;
-      padding: 4rem 0 3rem;
+      padding: 5rem 0 3rem;
+      position: relative;
     }
 
-    .footer-content {
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 1fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+    }
+
+    .footer-col {
       display: flex;
       flex-direction: column;
-      gap: 3rem;
+      align-items: flex-start;
     }
 
-    .contact-info {
+    .footer-col-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--brand-orange);
+      margin-bottom: 1.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-desc {
+      font-size: 0.9rem;
+      opacity: 0.75;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-logo {
+      height: 44px;
+      width: auto;
+      margin-bottom: 1.5rem;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-links {
+      list-style: none;
       display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .contact-info a {
+    .footer-links a {
       color: white;
       text-decoration: none;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      opacity: 0.8;
-      transition: opacity 0.2s;
+      font-size: 0.9rem;
+      opacity: 0.75;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .contact-info a:hover { opacity: 1; color: var(--brand-orange); }
+    .footer-links a:hover {
+      opacity: 1;
+      color: var(--brand-orange);
+      transform: translateX(4px);
+    }
+
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .contact-icon {
+      color: var(--brand-orange);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .contact-item a, .contact-item span {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.75;
+      line-height: 1.4;
+      transition: var(--transition);
+    }
+
+    .contact-item a:hover {
+      opacity: 1;
+      color: var(--brand-orange);
+    }
 
     .legal {
       padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       justify-content: space-between;
+      align-items: center;
       font-family: var(--font-mono);
-      font-size: 0.65rem;
+      font-size: 0.68rem;
       opacity: 0.5;
     }
 
+    /* BOTÓN BACK TO TOP */
+    .back-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      background: var(--brand-blue);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 50;
+      box-shadow: var(--shadow-md);
+    }
+
+    .back-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-top:hover {
+      background: var(--brand-orange);
+      transform: translateY(-4px);
+      box-shadow: 0 4px 14px rgba(240, 114, 0, 0.4);
+    }
+
+    /* RESPONSIVIDAD */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+        padding-top: 5rem;
+      }
+      .hero-content {
+        align-items: center;
+      }
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .footer-grid {
+        grid-template-columns: 1.2fr 1fr;
+        gap: 3rem;
+      }
+      .footer-col:last-child {
+        grid-column: span 2;
+      }
+      .contact-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        width: 100%;
+      }
+    }
+
     @media (max-width: 768px) {
-      .hero h1 { font-size: 3rem; }
-      .about-grid { grid-template-columns: 1fr; }
-      .contact-info { flex-direction: column; align-items: center; text-align: center; gap: 1rem; }
-      .legal { flex-direction: column; align-items: center; gap: 0.5rem; }
+      nav {
+        height: 70px;
+      }
+      .nav-links {
+        display: none; /* En un entorno real se crearía un menú hamburguesa */
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .about-item {
+        padding: 2rem;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .footer-col:last-child {
+        grid-column: span 1;
+      }
+      .contact-list {
+        grid-template-columns: 1fr;
+      }
+      .legal {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
+  <!-- HEADER / NAVIGATION -->
+  <header id="header">
     <div class="container">
       <nav>
-        <a href="#" class="brand">INSTITUTO LEIBNITZ Villa María</a>
+        <a href="#home" class="brand">
+          <img src="https://leibnitz.edu.ar/wp-content/uploads/2024/01/logo.png" alt="Instituto Leibnitz" />
+          <div class="brand-text">
+            <span class="brand-title">INSTITUTO LEIBNITZ</span>
+            <span class="brand-subtitle">Precursores 2026</span>
+          </div>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#home">Inicio</a></li>
+          <li><a href="#jornadas">Jornadas</a></li>
+          <li><a href="#sobre">Pilares</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
-  <main class="container">
+  <!-- MAIN CONTENT -->
+  <main>
     
-    <section class="hero">
-      <div class="tag">Agendas de trabajo</div>
-      <h1>Jornadas de Formación Situada 2026</h1>
-      <p>Un itinerario de formación situada diseñado para potenciar la enseñanza, fortalecer el liderazgo pedagógico y consolidar comunidades de aprendizaje profesional.</p>
+    <!-- HERO SECTION -->
+    <section id="home" class="container hero">
+      <div class="hero-content">
+        <div class="tag">Escuelas Precursoras</div>
+        <div class="hero-title-wrap">
+          <h1>Jornadas de <span>Formación Situada</span></h1>
+        </div>
+        <p>Un itinerario metodológico y pedagógico diseñado para potenciar las prácticas docentes en el aula, fortalecer la enseñanza de nivel superior y consolidar comunidades de aprendizaje institucional continuo.</p>
+        <div class="hero-actions">
+          <a href="#jornadas" class="btn btn-primary">Ver Jornadas Activas</a>
+          <a href="#sobre" class="btn btn-secondary">Conocer Pilares</a>
+        </div>
+      </div>
+      
+      <div class="hero-visual">
+        <!-- Panel Estadístico Premium -->
+        <div class="stats-panel">
+          <div class="panel-header">
+            <span class="panel-title">Métricas de Formación</span>
+            <span class="pulse-dot" title="Activo"></span>
+          </div>
+          <div class="stat-row">
+            <div class="stat-item">
+              <span class="stat-number">03</span>
+              <div class="stat-text">
+                <span class="stat-label">Jornadas Desarrolladas</span>
+                <span class="stat-sub">Ciclo lectivo activo</span>
+              </div>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">100%</span>
+              <div class="stat-text">
+                <span class="stat-label">Desarrollo Situado</span>
+                <span class="stat-sub">Enfoque centrado en el aula</span>
+              </div>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">12+</span>
+              <div class="stat-text">
+                <span class="stat-label">Recursos de Apoyo</span>
+                <span class="stat-sub">Plantillas y guías didácticas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="jornadas">
-      <h2 class="section-title">PLANIFICACIÓN  / AGENDAS DE TRABAJO</h2>
+    <!-- JORNADAS SECTION -->
+    <section id="jornadas" class="container">
+      <h2 class="section-title">PLANIFICACIÓN / AGENDAS DE TRABAJO</h2>
+      <p class="section-intro">Planificaciones, agendas y recursos diseñados para la priorización y el diseño de intervenciones pedagógicas institucionales.</p>
+      
       <div class="grid-jornadas">
         
-        <a href="https://spectacular-jelly-fbeaaa.netlify.app/" target="_blank" class="jornada-card">
+        <!-- JORNADA 2 -->
+        <a href="https://spectacular-jelly-fbeaaa.netlify.app/" target="_blank" rel="noopener" class="jornada-card">
           <div class="card-meta">
-            <span>[ JORNADA 2 ]</span>
+            <span class="card-num">[ JORNADA 02 ]</span>
             <span class="card-date">FEBRERO 2028</span>
           </div>
-          <h3 class="card-title">Encuentro de planificación y priorización</h3>
-          <p class="card-desc">Materiales para la identificación de problemas de enseñanza y definición de metas institucionales.</p>
-          <div class="card-action">ACCEDER A LA AGENDA <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          <div class="card-icon-wrap">
+            <!-- Icono: Planificación (Documento / Calendario) -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM16 2v4M8 2v4M3 10h18M8 14h8M8 18h5"/></svg>
+          </div>
+          <h3 class="card-title">Encuentro de Planificación y Priorización</h3>
+          <p class="card-desc">Materiales conceptuales y fichas de trabajo enfocadas en la identificación colectiva de problemas de enseñanza y la definición de metas institucionales.</p>
+          <div class="card-action">
+            Acceder a la Agenda
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
         </a>
 
-        <a href="https://bespoke-pavlova-ba6bfb.netlify.app/#" target="_blank" class="jornada-card">
+        <!-- JORNADA 3 -->
+        <a href="https://bespoke-pavlova-ba6bfb.netlify.app/#" target="_blank" rel="noopener" class="jornada-card">
           <div class="card-meta">
-            <span>[ JORNADA 3 ]</span>
+            <span class="card-num">[ JORNADA 03 ]</span>
             <span class="card-date">FEBRERO 2026</span>
           </div>
-          <h3 class="card-title">Diseño de intervenciones pedagógicas</h3>
-          <p class="card-desc">Planificación colegiada de secuencias didácticas orientadas a la innovación técnica.</p>
-          <div class="card-action">ACCEDER A LA AGENDA <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          <div class="card-icon-wrap">
+            <!-- Icono: Diseño / Ideas (Bombilla / Configuración) -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .3 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5h4zM9 18h6M10 22h4"/></svg>
+          </div>
+          <h3 class="card-title">Diseño de Intervenciones Pedagógicas</h3>
+          <p class="card-desc">Herramientas y marcos analíticos para el diseño colegiado de secuencias didácticas orientadas a la innovación técnica y al aprendizaje significativo.</p>
+          <div class="card-action">
+            Acceder a la Agenda
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
         </a>
 
-        <a href="https://jfs-mayo-leibnitz.netlify.app/" target="_blank" class="jornada-card">
+        <!-- JORNADA 4 -->
+        <a href="https://jfs-mayo-leibnitz.netlify.app/" target="_blank" rel="noopener" class="jornada-card">
           <div class="card-meta">
-            <span>[ JORNADA 4 ]</span>
+            <span class="card-num">[ JORNADA 04 ]</span>
             <span class="card-date">MAYO 2026</span>
           </div>
-          <h3 class="card-title">Seguimiento y validación de prácticas</h3>
-          <p class="card-desc">Instancia de monitoreo evolutivo para ajustar las estrategias de enseñanza según resultados observados.</p>
-          <div class="card-action">ACCEDER A LA AGENDA <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          <div class="card-icon-wrap">
+            <!-- Icono: Seguimiento (Gráfico / Tendencia) -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3 class="card-title">Seguimiento y Validación de Prácticas</h3>
+          <p class="card-desc">Instancia de monitoreo y análisis evolutivo sobre las secuencias didácticas aplicadas, orientada a ajustar estrategias de enseñanza según evidencias.</p>
+          <div class="card-action">
+            Acceder a la Agenda
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
         </a>
 
       </div>
     </section>
 
-    <section id="sobre">
+    <!-- PILARES SECTION -->
+    <section id="sobre" class="container">
       <h2 class="section-title">PILARES / MODELO DE TRANSFORMACIÓN</h2>
-      <p class="section-intro">Ejes de intervención pedagógica alineados con los objetivos estratégicos de la Red de Escuelas Precursoras.</p>
+      <p class="section-intro">Ejes de intervención pedagógica y metodológica alineados estratégicamente con los objetivos de la Red de Escuelas Precursoras.</p>
+      
       <div class="about-grid">
+        
+        <!-- PILAR 1 -->
         <div class="about-item">
-          <h3>Liderazgo y co-creación</h3>
-          <p>Se impulsa la transición desde el conocimiento individual hacia una construcción pedagógica colectiva y situada. Este proceso trasciende los esquemas de aprendizaje pasivo, promoviendo un liderazgo distribuido que dinamiza la participación activa de todos los actores del sistema educativo.</p>
+          <div class="about-item-icon">
+            <!-- Icono: Liderazgo (Usuarios) -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="about-item-content">
+            <h3>Liderazgo y co-creación</h3>
+            <p>Fomentamos la transición del saber individual hacia una construcción pedagógica colegiada. Este proceso promueve un liderazgo de carácter distribuido que dinamiza la participación activa de los equipos docentes.</p>
+          </div>
         </div>
+
+        <!-- PILAR 2 -->
         <div class="about-item">
-          <h3>Sentido situado</h3>
-          <p>Desarrollamos proyectos validados en la realidad técnica de nuestras aulas, garantizando respuestas pertinentes al contexto de Villa María.</p>
+          <div class="about-item-icon">
+            <!-- Icono: Situado (Pin de Mapa) -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="about-item-content">
+            <h3>Sentido situado</h3>
+            <p>Estructuramos proyectos diseñados y validados para la realidad técnica de nuestras aulas, garantizando respuestas y soluciones pedagógicas coherentes con el contexto específico de Villa María y su región.</p>
+          </div>
         </div>
+
+        <!-- PILAR 3 -->
         <div class="about-item">
-          <h3>Cultura de la experimentación</h3>
-          <p>Fomentamos el uso de recursos abiertos y bibliotecas colaborativas para ensayar y escalar nuevas prácticas docentes.</p>
+          <div class="about-item-icon">
+            <!-- Icono: Experimentación (Tubo de Ensayo / Ciencia) -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="about-item-content">
+            <h3>Cultura de la experimentación</h3>
+            <p>Estimulamos el uso de metodologías activas y repositorios didácticos dinámicos para ensayar, medir y perfeccionar las estrategias de enseñanza técnica, adaptándonos al ritmo de la innovación educativa.</p>
+          </div>
         </div>
+
+        <!-- PILAR 4 -->
         <div class="about-item">
-          <h3>Evaluación para la mejora</h3>
-          <p>Implementamos registros y seguimientos del recorrido institucional para medir el impacto y tomar decisiones basadas en evidencia.</p>
+          <div class="about-item-icon">
+            <!-- Icono: Evaluación (Checklist / Portapapeles) -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="about-item-content">
+            <h3>Evaluación para la mejora</h3>
+            <p>Implementamos dispositivos de registro y sistematización de los trayectos institucionales. La recolección de información estructurada permite evaluar el impacto y tomar decisiones basadas en evidencias.</p>
+          </div>
         </div>
+
       </div>
     </section>
 
   </main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="contact-info">
-          <a href="mailto:secretaria@leibnitz.edu.ar">secretaria@leibnitz.edu.ar</a>
-          <a href="tel:+5493534069816">+54 9 3534 06-9816</a>
-          <a href="#">Rawson 1899 · Villa María · Córdoba</a>
-        </div>
-        <div class="legal">
-          <span>© 2026 INSTITUTO LEIBNITZ</span>
-          <span>COMPROMISO DE MEJORA INSTITUCIONAL // V_2.0</span>
-        </div>
+  <!-- FOOTER -->
+  <footer id="contacto">
+    <div class="container footer-grid">
+      
+      <!-- COLUMNA 1: LOGO E INFO -->
+      <div class="footer-col">
+        <img class="footer-logo" src="https://leibnitz.edu.ar/wp-content/uploads/2024/01/logo.png" alt="Instituto Leibnitz" />
+        <p class="footer-desc">El Instituto Leibnitz es parte de la Red de Escuelas Precursoras de nivel superior, liderando trayectos educativos y de innovación metodológica enfocados en el desarrollo situado y la calidad pedagógica.</p>
       </div>
+
+      <!-- COLUMNA 2: ACCESOS RÁPIDOS -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">Accesos Rápidos</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Inicio</a></li>
+          <li><a href="#jornadas">Agendas de Trabajo</a></li>
+          <li><a href="#sobre">Pilares del Modelo</a></li>
+          <li><a href="https://leibnitz.edu.ar/" target="_blank" rel="noopener">Sitio Oficial Leibnitz</a></li>
+        </ul>
+      </div>
+
+      <!-- COLUMNA 3: CONTACTO -->
+      <div class="footer-col">
+        <h4 class="footer-col-title">Información de Contacto</h4>
+        <ul class="contact-list">
+          <li class="contact-item">
+            <svg class="contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:secretaria@leibnitz.edu.ar">secretaria@leibnitz.edu.ar</a>
+          </li>
+          <li class="contact-item">
+            <svg class="contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:+5493534069816">+54 9 3534 06-9816</a>
+          </li>
+          <li class="contact-item">
+            <svg class="contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C10.6 20.4 3 13 3 10a9 9 0 1 1 18 0c0 3-7.6 10.4-9 11.7z"/></svg>
+            <span>Rawson 1899 · Villa María · Córdoba</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- SECCIÓN LEGAL -->
+    <div class="container legal">
+      <span>© 2026 INSTITUTO LEIBNITZ · VILLA MARÍA</span>
+      <span>COMPROMISO DE MEJORA INSTITUCIONAL · V_2.0</span>
     </div>
   </footer>
+
+  <!-- BUTTON BACK TO TOP -->
+  <button class="back-top" id="backTopBtn" title="Volver arriba" onclick="scrollToTop()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <!-- JAVASCRIPT FOR DYNAMIC STYLES AND BACK-TO-TOP -->
+  <script>
+    // Manejar scroll en header y botón back-to-top
+    const header = document.getElementById('header');
+    const backTopBtn = document.getElementById('backTopBtn');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scroll');
+      } else {
+        header.classList.remove('scroll');
+      }
+
+      if (window.scrollY > 400) {
+        backTopBtn.classList.add('visible');
+      } else {
+        backTopBtn.classList.remove('visible');
+      }
+    });
+
+    // Función para scroll suave hacia arriba
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  </script>
 
 </body>
 </html>
